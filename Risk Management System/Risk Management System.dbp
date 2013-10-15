@@ -1,0 +1,10 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "Risk Management System"
+   MSDTVersion = "80"
+   Begin DBRefFolder = "Database References"
+   End
+   Begin Folder = "Queries"
+   End
+   Begin Folder = "Task"
+   End
+End
