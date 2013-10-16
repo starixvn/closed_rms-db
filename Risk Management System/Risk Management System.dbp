@@ -6,5 +6,11 @@ Begin DataProject = "Risk Management System"
    Begin Folder = "Queries"
    End
    Begin Folder = "Task"
+      Script = "dbo.Task_RMS_CleanOLDdataBettransParlay.sql"
+      Script = "dbo.Task_RMS_DailySummaryWinloss.sql"
+      Script = "dbo.Task_RMS_DailySummaryWinloss_Job.sql"
+      Script = "dbo.Task_RMS_SumWinloss_Archive.sql"
+      Script = "dbo.Task_RMS_SumWinloss_Archive_Job.sql"
+      Script = "dbo.Task_RMS_SyncDataForBettransParlay.sql"
    End
 End
