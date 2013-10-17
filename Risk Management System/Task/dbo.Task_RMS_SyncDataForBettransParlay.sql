@@ -27,14 +27,14 @@ BEGIN
 	[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 	[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
 	[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-	[balance]) 
+	[balance], [Combo]) 
 	SELECT 
 		[TransId] ,[CustId] ,[TransDate] ,[OddsId] ,[Hdp1] ,[Hdp2] ,[Odds] ,[Stake] ,[Status] ,[WinLost] ,
 		[PlayerComm] ,[PlayerDiscount] ,[TWinLost] ,[TComm] ,[TPositionTaking] ,[TDiscount] ,[AgentIdList] ,[AgentPositionTakingList] ,
 		[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 		[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
 		[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-		[balance]
+		[balance], RIGHT(betcheck,len(betcheck)-1)
 	FROM RepDB.dbo.bettrans with (NOLOCK)
 	WHERE matchid in (9,29)	
 END
@@ -45,7 +45,7 @@ BEGIN
 		[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 		[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
 		[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-		[balance]
+		[balance], RIGHT(betcheck,len(betcheck)-1) as combo
 	INTO #temp			
 	FROM RepDB.dbo.bettrans with (NOLOCK)
 	WHERE tstamp between @tstamp_min and @tstamp_max
@@ -104,14 +104,14 @@ BEGIN
 				,[SecAcceptFlag] = s.SecAcceptFlag
 				,[OddsType] = s.OddsType 
 				,[balance] = s.balance
-				
+				,[combo] = s.combo
 		WHEN NOT MATCHED THEN 
 		INSERT ([TransId] ,[CustId] ,[TransDate] ,[OddsId] ,[Hdp1] ,[Hdp2] ,[Odds] ,[Stake] ,[Status] ,[WinLost] ,
 			[PlayerComm] ,[PlayerDiscount] ,[TWinLost] ,[TComm] ,[TPositionTaking] ,[TDiscount] ,[AgentIdList] ,[AgentPositionTakingList] ,
 			[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 			[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
 			[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-			[balance]
+			[balance] ,[combo]
 			)
 		VALUES (
 			s.TransId ,s.CustId ,s.TransDate ,s.OddsId ,s.Hdp1 ,s.Hdp2 ,s.Odds ,s.Stake ,s.Status ,s.WinLost ,
@@ -119,7 +119,7 @@ BEGIN
 			s.AgentDiscountList ,s.LiveHomeScore ,s.LiveAwayScore ,s.LiveIndicator ,s.BetTeam ,s.Creator ,s.RefNo ,[WinLostDate] ,[BetFrom] ,
 			s.BetCheck ,s.CheckTime ,s.OddsSpread ,s.ActualRate ,s.MatchId ,s.Ruben ,s.BetId ,s.StatusWinLost ,s.MOdds ,s.BetType ,s.Actual_Stake ,
 			s.Currency ,s.IP ,s.TransDesc ,s.Username ,s.CurrencyName ,s.VirtualRate ,s.StatusId ,s.DoubleCommLosing ,s.SecAcceptFlag ,s.OddsType ,
-			s.balance
+			s.balance, s.combo
 		)
 	;--end MERGE	
 END

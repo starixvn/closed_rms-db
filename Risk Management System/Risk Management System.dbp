@@ -3,7 +3,43 @@ Begin DataProject = "Risk Management System"
    MSDTVersion = "80"
    Begin DBRefFolder = "Database References"
    End
+   Begin Folder = "Monitoring"
+      Script = "dbo.RMS_Monitor_Parlay_Betlist.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_Currency.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_Currency_Event.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_Event.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_Event_Bettype.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_Event_Bettype_Choice.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_League.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTicket_League_Event.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTurnover.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTurnover_Currency.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTurnover_Currency_Event.sql"
+      Script = "RMS_Monitor_Parlay_SelectionByTurnover_Event.sql"
+   End
    Begin Folder = "Queries"
+      Begin Folder = "Top Winners"
+      End
+   End
+   Begin Folder = "Reports"
+      Begin Folder = "Similar bets"
+         Script = "dbo.RMS_Similar_Parlay_Betlist.sql"
+      End
+      Begin Folder = "Top Winners"
+         Script = "dbo.RMS_Rpt_Parlay_TopWinners.sql"
+         Script = "dbo.RMS_Rpt_Parlay_TopWinners_Bet_Details.sql"
+         Script = "dbo.RMS_Rpt_Parlay_TopWinners_Details.sql"
+         Script = "dbo.RMS_Rpt_Parlay_TopWinners_Details_Old.sql"
+         Script = "dbo.RMS_SelBalanceUpDay.sql"
+      End
+      Begin Folder = "Total Outstanding"
+         Script = "dbo.RMS_Rpt_Parlay_Outstanding_Mem.sql"
+      End
+      Begin Folder = "Winloss"
+         Script = "dbo.RMS_Rpt_Parlay_Winloss.sql"
+         Script = "dbo.RMS_Rpt_Parlay_Winloss_Mem.sql"
+      End
    End
    Begin Folder = "Task"
       Script = "dbo.Task_RMS_CleanOLDdataBettransParlay.sql"
