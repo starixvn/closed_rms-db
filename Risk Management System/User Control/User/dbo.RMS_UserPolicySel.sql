@@ -1,0 +1,36 @@
+﻿ ALTER PROCEDURE [dbo].[RMS_UserPolicySel]
+	@UserID		INT
+AS
+	/*
+		Created: Johnson
+		Date: 2013-10-18
+		Task: Get policy of user
+		DB: SVRCSD/bodb_RMS
+		
+		Revisions:
+			
+		Parameter's Explanation:
+	*/ 
+SET NOCOUNT ON
+
+	SELECT f.funcid, f.funckey, f.funcname, f.DisplayOrder, f.ParentID, f.ParentName, ISNULL(u.policy,0) UserPolicy, ISNULL(g.policy,0) GroupPolicy
+	FROM rmFunction f WITH(NOLOCK)
+	LEFT JOIN 	
+		(
+			SELECT FuncID, Policy 
+			FROM rmUserPolicy WITH(NOLOCK) 
+			WHERE UserID = @UserID
+		) u ON f.funcid  = u.funcid
+	LEFT JOIN
+		(
+			SELECT FuncID, Policy
+			FROM rmGroupPolicy gp WITH(NOLOCK)
+				INNER JOIN rmUserInfo ui WITH(NOLOCK) ON ui.userid = @userid AND ui.groupid = gp.groupid		
+		) g ON f.funcid = g.funcid
+	ORDER BY f.ParentID ,f.DisplayOrder ASC
+
+
+
+
+GO
+GRANT EXECUTE ON [dbo].[RMS_UserPolicySel] TO [bodbRMSNet]
