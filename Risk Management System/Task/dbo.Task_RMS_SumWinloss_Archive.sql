@@ -37,7 +37,8 @@ BEGIN
       ,[company_winlost]
       ,[actualrate]
       ,[odds]
-      ,[betcount]      
+      ,[betcount] 
+      ,[agentid]     
 	)
 	SELECT [winlostdate]
       ,[custid]
@@ -53,6 +54,7 @@ BEGIN
       ,[actualrate]
       ,[odds]
       ,[betcount]     
+      ,[agentid]
   FROM [dbo].[rmSumWinloss] WITH(NOLOCK)
   WHERE winlostdate = @winlostdate
   

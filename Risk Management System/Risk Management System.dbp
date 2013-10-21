@@ -5,7 +5,23 @@ Begin DataProject = "Risk Management System"
       Script = "dbo.RMS_UserInfoUpdStatus.sql"
       Script = "dbo.RMS_UserInfoUpdUserPwd.sql"
    End
+   Begin Folder = "Customer"
+      Script = "dbo.RMS_CustomerCheckExisting.sql"
+      Script = "dbo.RMS_CustomerIns.sql"
+      Script = "dbo.RMS_CustomerSel.sql"
+      Script = "dbo.RMS_CustomerSelInfoByUsername.sql"
+      Script = "dbo.RMS_CustomerUpd.sql"
+   End
    Begin DBRefFolder = "Database References"
+   End
+   Begin Folder = "Function"
+      Script = "dbo.f_RMS_PolicySplit.sql"
+      Script = "dbo.f_RMS_strSplit.sql"
+   End
+   Begin Folder = "Logs"
+      Script = "dbo.RMS_WriteLog_UserLog_Login.sql"
+      Script = "dbo.RMS_WriteLog_UserLog_RunSP.sql"
+      Script = "dbo.RMS_WriteLog_UserLog_UserControl.sql"
    End
    Begin Folder = "Monitoring"
       Script = "dbo.RMS_Monitor_Parlay_Betlist.sql"
@@ -44,10 +60,12 @@ Begin DataProject = "Risk Management System"
          Script = "dbo.RMS_SelBalanceUpDay.sql"
       End
       Begin Folder = "Total Outstanding"
+         Script = "dbo.RMS_Rpt_Parlay_Outstanding_Ag.sql"
          Script = "dbo.RMS_Rpt_Parlay_Outstanding_Mem.sql"
       End
       Begin Folder = "Winloss"
          Script = "dbo.RMS_Rpt_Parlay_Winloss.sql"
+         Script = "dbo.RMS_Rpt_Parlay_Winloss_Ag.sql"
          Script = "dbo.RMS_Rpt_Parlay_Winloss_Mem.sql"
       End
    End

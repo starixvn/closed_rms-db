@@ -72,6 +72,13 @@ SET NOCOUNT ON
 			SELECT	 @ErrMsg = 'FAILED:Process summary data failed for :' + CAST(@winlostdate AS VARCHAR(10))
 					,@ErrCode = 201
 			RETURN
-		END					
+		END	
+		
+		UPDATE r	
+		SET r.AgentID = c.AgentID
+		FROM rmSumWinloss r WITH(UPDLOCK,ROWLOCK)
+			INNER JOIN [RepDB].[dbo].[CustInfo] c WITH(NOLOCK) ON r.custid = c.custid
+		WHERE r.winlostdate = @winlostdate			
+				
 	END	
 	

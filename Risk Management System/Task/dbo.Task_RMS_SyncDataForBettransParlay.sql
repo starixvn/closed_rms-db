@@ -27,15 +27,16 @@ BEGIN
 	[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 	[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
 	[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-	[balance], [Combo]) 
+	[balance], [Combo], [AgentID]) 
 	SELECT 
-		[TransId] ,[CustId] ,[TransDate] ,[OddsId] ,[Hdp1] ,[Hdp2] ,[Odds] ,[Stake] ,[Status] ,[WinLost] ,
+		[TransId] ,b.[CustId] ,[TransDate] ,[OddsId] ,[Hdp1] ,[Hdp2] ,[Odds] ,[Stake] , b.[Status] ,[WinLost] ,
 		[PlayerComm] ,[PlayerDiscount] ,[TWinLost] ,[TComm] ,[TPositionTaking] ,[TDiscount] ,[AgentIdList] ,[AgentPositionTakingList] ,
-		[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] ,[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
+		[AgentDiscountList] ,[LiveHomeScore] ,[LiveAwayScore] ,[LiveIndicator] ,[BetTeam] , b.[Creator] ,[RefNo] ,[WinLostDate] ,[BetFrom] ,
 		[BetCheck] ,[CheckTime] ,[OddsSpread] ,[ActualRate] ,[MatchId] ,[Ruben] ,[BetId] ,[StatusWinLost] ,[MOdds] ,[BetType] ,[Actual_Stake] ,
-		[Currency] ,[IP] ,[TransDesc] ,[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
-		[balance], RIGHT(betcheck,len(betcheck)-1)
-	FROM RepDB.dbo.bettrans with (NOLOCK)
+		b.[Currency] ,[IP] ,[TransDesc] ,b.[Username] ,[CurrencyName] ,[VirtualRate] ,[StatusId] ,b.[DoubleCommLosing] ,[SecAcceptFlag] ,[OddsType] ,
+		[balance], RIGHT(betcheck,len(betcheck)-1), c.AgentId
+	FROM RepDB.dbo.bettrans b with (NOLOCK)
+		INNER JOIN RepDB.[dbo].[CustInfo] c WITH(NOLOCK) ON b.custid = c.custid
 	WHERE matchid in (9,29)	
 END
 ELSE 
