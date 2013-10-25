@@ -10,7 +10,7 @@ AS
 	/*
 		Created: Johnson
 		Date: 2013-10-11
-		DB: SVRCS/bodb_RMS
+		DB: SVRCSD/bodb_RMS
 		Task: report parlay winloss
 		
 		Revisions:

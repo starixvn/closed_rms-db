@@ -10,7 +10,7 @@ AS
 	/*
 		Created: Johnson	
 		Date: 2013-10-17
-		DB: SVRCS/bodb_RMS
+		DB: SVRCSD/bodb_RMS
 		Task: Get report win loss by specific member
 		
 		Revisions:

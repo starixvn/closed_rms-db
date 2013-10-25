@@ -1,6 +1,7 @@
 ﻿ ALTER PROCEDURE [dbo].[RMS_CustomerSelInfoByUsername]
 	@username NVARCHAR(50),
-	@custid		INT = 0 OUTPUT
+	@custid		INT = 0 OUTPUT,
+	@roleid		INT = 0 OUTPUT
 	
 AS
 	/*
@@ -15,9 +16,14 @@ AS
 	*/
 SET NOCOUNT ON 
 
-	SELECT @custid = custid
-	FROM [dbo].[CustInfo] WITH(NOLOCK) 
+	SELECT @custid = custid, @roleid = 1
+	FROM RepDB.[dbo].[CustInfo] WITH(NOLOCK) 
 	WHERE username = @username
+	
+	IF @custid IS NULL
+		SELECT @custid = [AgentId], @roleid = 2
+		FROM RepDB.[dbo].[AgentInfo] WITH(NOLOCK) 
+		WHERE username = @username
 
 GO
 GRANT EXECUTE ON  [dbo].[RMS_CustomerSelInfoByUsername] TO [bodbRMSNet]

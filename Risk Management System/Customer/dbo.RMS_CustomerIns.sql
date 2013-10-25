@@ -1,5 +1,5 @@
 ﻿ ALTER PROCEDURE [dbo].[RMS_CustomerIns]
-	@adminid	INT,
+	@CurrentUserId	INT,
 	@username	VARCHAR(30),
 	@level		INT,
 	@IP			VARCHAR(50),	
@@ -24,11 +24,6 @@ SET NOCOUNT ON
 	
 	SET @startRun=GETDATE()
 	
-	EXEC RMS_UserCheckPermission @UserID = @AdminID ,@FuncKey = 'ManageCustomer', @ErrCode = @ErrCode OUTPUT, @ErrMsg = @ErrMsg OUTPUT
-	
-	IF @ErrCode > 0
-		RETURN
-	
 	DECLARE @custid INT, @roleid TINYINT
 	
 	SELECT @custid = custid
@@ -50,7 +45,7 @@ SET NOCOUNT ON
 	END
 	
 	INSERT INTO rmCustomer (custid, username, [level], createdDate, creator)
-	VALUES (@custid, @username, @level, CURRENT_TIMESTAMP, @AdminID)
+	VALUES (@custid, @username, @level, CURRENT_TIMESTAMP, @CurrentUserId)
 	
 	DECLARE @LogData NVARCHAR(500)	
 	
@@ -62,7 +57,7 @@ SET NOCOUNT ON
 	SET @duration  = DATEDIFF (MILLISECOND,@startRun,@endRun)   
 	
 	EXEC SVRLOG.LogDB.[dbo].[RMS_WriteLog_UserLog_RunSP] 
-		@userid		= @AdminID, 
+		@userid		= @CurrentUserId, 
 		@actionid	= 10400,	
 		@TrackingValue = @LogData, 					
 		@duration	= @duration

@@ -45,6 +45,8 @@ Begin DataProject = "Risk Management System"
       Script = "RMS_Parlay_TransDetails.sql"
    End
    Begin Folder = "Queries"
+      Script = "Req_20131025_Feature6675_InsertLogAction.sql"
+      Script = "Req_20131025_Feature6675_StructureRMSforApollo.sql"
       Begin Folder = "Top Winners"
       End
    End

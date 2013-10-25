@@ -1,5 +1,5 @@
 ﻿  ALTER PROCEDURE [dbo].[RMS_CustomerUpd]
-	@AdminID	INT,
+	@CurrentUserId	INT,
 	@custid		INT,
 	@level		INT,	
 	@IP			VARCHAR(50),
@@ -21,13 +21,8 @@ SET NOCOUNT ON
 			,@endRun datetime  
 			,@duration int		
 	
-	SET @startRun=GETDATE()
-	
-	EXEC RMS_UserCheckPermission @UserID = @AdminID ,@FuncKey = 'ManageCustomer', @ErrCode = @ErrCode OUTPUT, @ErrMsg = @ErrMsg OUTPUT
-	
-	IF @ErrCode > 0
-		RETURN
-	
+	SET @startRun=GETDATE()	
+
 	DECLARE @old_level INT
 	
 	SELECT @old_level = level
@@ -53,7 +48,7 @@ SET NOCOUNT ON
 	SET @duration  = DATEDIFF (MILLISECOND,@startRun,@endRun) 
 	
 	EXEC SVRLOG.LogDB.[dbo].[RMS_WriteLog_UserLog_RunSP] 
-		@Userid		= @Adminid,	
+		@Userid		= @CurrentUserId,	
 		@ActionID	= 10401,
 		@TrackingValue	= @LogData,
 		@TrackingValue2 = @LogData_Old,
