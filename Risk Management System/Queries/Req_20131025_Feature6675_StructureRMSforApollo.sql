@@ -406,45 +406,45 @@ GO
 -----------------------------------------------------------------------------
 --create file group on LogDB for store log user run sp
 --------------------------------------------------------
-USE LogDB
-GO
+--USE LogDB
+--GO
 
-ALTER DATABASE LogDB
-ADD FILEGROUP rmLogUserRunSP
-GO
+--ALTER DATABASE LogDB
+--ADD FILEGROUP rmLogUserRunSP
+--GO
 
-ALTER DATABASE LogDB
-ADD FILE ( NAME = N'rmLogUserRunSP', FILENAME = N'D:\APL_DB\CustomerLog\rmLogUserRunSP.ndf' , SIZE = 10240KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
-TO FILEGROUP rmLogUserRunSP
+--ALTER DATABASE LogDB
+--ADD FILE ( NAME = N'rmLogUserRunSP', FILENAME = N'D:\APL_DB\CustomerLog\rmLogUserRunSP.ndf' , SIZE = 10240KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+--TO FILEGROUP rmLogUserRunSP
 
 ------------------------------------------------------------------------------
 
-USE [LogDB]
-GO
 
-/****** Object:  Table [dbo].[rmUserLog_RunSP]    Script Date: 10/25/2013 2:40:47 PM ******/
-SET ANSI_NULLS ON
-GO
+--USE [LogDB]
+--GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+--/****** Object:  Table [dbo].[rmUserLog_RunSP]    Script Date: 10/25/2013 2:40:47 PM ******/
+--SET ANSI_NULLS ON
+--GO
 
-CREATE TABLE [dbo].[rmUserLog_RunSP](
-	[LogID] [bigint] IDENTITY(1,1) NOT NULL,
-	[UserID] [int] NULL,
-	[Logdate] [datetime] NULL,
-	[CustID] [int] NULL,
-	[ActionID] [int] NULL,
-	[TrackingValue] [nvarchar](max) NULL,
-	[Duration] [int] NULL,
-	[TrackingValue2] [nvarchar](max) NULL,
- CONSTRAINT [PK_rmUserLog_RunSP] PRIMARY KEY CLUSTERED 
-(
-	[LogID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmLogUserRunSP]
-) ON [rmLogUserRunSP] TEXTIMAGE_ON [rmLogUserRunSP]
+--SET QUOTED_IDENTIFIER ON
+--GO
 
-GO
+--CREATE TABLE [dbo].[rmUserLog_RunSP](
+--	[LogID] [bigint] IDENTITY(1,1) NOT NULL,
+--	[UserID] [int] NULL,
+--	[Logdate] [datetime] NULL,
+--	[CustID] [int] NULL,
+--	[ActionID] [int] NULL,
+--	[TrackingValue] [nvarchar](max) NULL,
+--	[Duration] [int] NULL,
+--	[TrackingValue2] [nvarchar](max) NULL,
+-- CONSTRAINT [PK_rmUserLog_RunSP] PRIMARY KEY CLUSTERED 
+--(
+--	[LogID] ASC
+--)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmLogUserRunSP]
+--) ON [rmLogUserRunSP] TEXTIMAGE_ON [rmLogUserRunSP]
 
+--GO
 
 

@@ -83,14 +83,14 @@ SET NOCOUNT ON
 			,sum(case when statusid = 112 then -(winlost-actual_stake)*actualrate*(1-tpositiontaking) else 0 end) as ourPT_won
 			,sum(case when statusid = 113 then -(winlost-actual_stake)*actualrate*(1-tpositiontaking) else 0 end) as ourPT_lose
 		 FROM rmBettrans b WITH(NOLOCK)
-			INNER JOIN [dbo].[CustInfo] c WITH(NOLOCK) ON b.custid = c.custid
+			INNER JOIN RepDB.[dbo].[CustInfo] c WITH(NOLOCK) ON b.custid = c.custid
 		 WHERE c.AgentID = @custid 
 			AND winlostdate BETWEEN @f_date AND @t_date
 			AND matchid = 9 
 			AND statusid IN (112,113)
 			AND liveawayscore = ISNULL(@sporttype,liveawayscore)
 			AND right(betcheck,len(betcheck)-1) IN (SELECT selection FROM @tmpSelection)
-		 GROUP BY convert(varchar(7),winlostdate,120),username
+		 GROUP BY convert(varchar(7),winlostdate,120),b.username
 	END
 	
 	IF @fromdate <= @movebetsday

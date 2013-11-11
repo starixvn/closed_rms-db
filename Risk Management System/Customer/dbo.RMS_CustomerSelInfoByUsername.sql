@@ -20,7 +20,7 @@ SET NOCOUNT ON
 	FROM RepDB.[dbo].[CustInfo] WITH(NOLOCK) 
 	WHERE username = @username
 	
-	IF @custid IS NULL
+	IF ISNULL(@custid,0) = 0
 		SELECT @custid = [AgentId], @roleid = 2
 		FROM RepDB.[dbo].[AgentInfo] WITH(NOLOCK) 
 		WHERE username = @username

@@ -12,7 +12,7 @@ AS
 		Revisions:
 		
 		Parameter's Explanation:
-			-@sporttype = 0 : all sports
+			-@sporttype = '1,2,3' : all sports
 						= 1 : soccer only
 						= 2 : Other sports
 						= 3 : combined sports
@@ -53,7 +53,7 @@ SET NOCOUNT ON
 			AND matchid = 9
 			AND statusid = 0		
 			AND liveawayscore IN (SELECT sporttype FROM @tmpSport)
-			AND right(betcheck,len(betcheck)-1) IN (SELECT selection FROM @tmpSelection)
+			AND combo IN (SELECT selection FROM @tmpSelection)
 		GROUP BY b.custid, b.username
 		) r
 	ORDER  BY maxpayoutPT DESC 
