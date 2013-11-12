@@ -254,12 +254,11 @@ CREATE NONCLUSTERED INDEX [IX_winlostdate_matchid_statusid] ON [dbo].[rmBetTrans
 	[StatusId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmIndex]
 GO
--------------------------------------------
 
 USE [bodb_RMS]
 GO
 
-/****** Object:  Index [IX_AgentID]    Script Date: 10/25/2013 1:33:52 PM ******/
+/****** Object:  Index [IX_AgentID]    Script Date: 11/12/2013 8:59:04 AM ******/
 CREATE NONCLUSTERED INDEX [IX_AgentID] ON [dbo].[rmBetTrans]
 (
 	[agentID] ASC
@@ -319,6 +318,16 @@ CREATE CLUSTERED INDEX [CIX_rmSumWinloss] ON [dbo].[rmSumWinloss]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmSumWinloss]
 GO
 
+USE [bodb_RMS]
+GO
+
+/****** Object:  Index [IX_AgentID]    Script Date: 11/12/2013 9:08:52 AM ******/
+CREATE NONCLUSTERED INDEX [IX_AgentID] ON [dbo].[rmSumWinloss]
+(
+	[AgentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmIndex]
+GO
+
 --------------------------------------------------------------------------------
 
 USE [bodb_RMS]
@@ -372,6 +381,16 @@ CREATE CLUSTERED INDEX [CIX_rmSumWinloss_Old] ON [dbo].[rmSumWinloss_Old]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmSumWinlossOld]
 GO
 
+USE [bodb_RMS]
+GO
+
+/****** Object:  Index [IX_AgentID]    Script Date: 11/12/2013 9:33:54 AM ******/
+CREATE NONCLUSTERED INDEX [IX_AgentID] ON [dbo].[rmSumWinloss_Old]
+(
+	[AgentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmIndex]
+GO
+
 ----------------------------------------------------------------------------
 
 USE [bodb_RMS]
@@ -406,45 +425,45 @@ GO
 -----------------------------------------------------------------------------
 --create file group on LogDB for store log user run sp
 --------------------------------------------------------
---USE LogDB
---GO
+USE LogDB
+GO
 
---ALTER DATABASE LogDB
---ADD FILEGROUP rmLogUserRunSP
---GO
+ALTER DATABASE LogDB
+ADD FILEGROUP rmLogUserRunSP
+GO
 
---ALTER DATABASE LogDB
---ADD FILE ( NAME = N'rmLogUserRunSP', FILENAME = N'D:\APL_DB\CustomerLog\rmLogUserRunSP.ndf' , SIZE = 10240KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
---TO FILEGROUP rmLogUserRunSP
+ALTER DATABASE LogDB
+ADD FILE ( NAME = N'rmLogUserRunSP', FILENAME = N'D:\APL_DB\CustomerLog\rmLogUserRunSP.ndf' , SIZE = 10240KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+TO FILEGROUP rmLogUserRunSP
 
-------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 
---USE [LogDB]
---GO
+USE [LogDB]
+GO
 
---/****** Object:  Table [dbo].[rmUserLog_RunSP]    Script Date: 10/25/2013 2:40:47 PM ******/
---SET ANSI_NULLS ON
---GO
+/****** Object:  Table [dbo].[rmUserLog_RunSP]    Script Date: 10/25/2013 2:40:47 PM ******/
+SET ANSI_NULLS ON
+GO
 
---SET QUOTED_IDENTIFIER ON
---GO
+SET QUOTED_IDENTIFIER ON
+GO
 
---CREATE TABLE [dbo].[rmUserLog_RunSP](
---	[LogID] [bigint] IDENTITY(1,1) NOT NULL,
---	[UserID] [int] NULL,
---	[Logdate] [datetime] NULL,
---	[CustID] [int] NULL,
---	[ActionID] [int] NULL,
---	[TrackingValue] [nvarchar](max) NULL,
---	[Duration] [int] NULL,
---	[TrackingValue2] [nvarchar](max) NULL,
--- CONSTRAINT [PK_rmUserLog_RunSP] PRIMARY KEY CLUSTERED 
---(
---	[LogID] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmLogUserRunSP]
---) ON [rmLogUserRunSP] TEXTIMAGE_ON [rmLogUserRunSP]
+CREATE TABLE [dbo].[rmUserLog_RunSP](
+	[LogID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserID] [int] NULL,
+	[Logdate] [datetime] NULL,
+	[CustID] [int] NULL,
+	[ActionID] [int] NULL,
+	[TrackingValue] [nvarchar](max) NULL,
+	[Duration] [int] NULL,
+	[TrackingValue2] [nvarchar](max) NULL,
+ CONSTRAINT [PK_rmUserLog_RunSP] PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [rmLogUserRunSP]
+) ON [rmLogUserRunSP] TEXTIMAGE_ON [rmLogUserRunSP]
 
---GO
+GO
 
 

@@ -49,7 +49,7 @@ SET NOCOUNT ON
 	
 	EXEC SVRLOG.LogDB.[dbo].[RMS_WriteLog_UserLog_RunSP] 
 		@Userid		= @CurrentUserId,	
-		@ActionID	= 10401,
+		@ActionID	= 10001,
 		@TrackingValue	= @LogData,
 		@TrackingValue2 = @LogData_Old,
 		@Duration	= @duration

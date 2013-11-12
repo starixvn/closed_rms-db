@@ -51,3 +51,10 @@ GO
 GRANT SELECT ON [Exchange] to bodbRMSNet
 GO
 -----------------------------------------------
+---GRANT PERMISSION ON SVRLOG
+use LogDB
+GO
+CREATE user bodbRMSNet for login bodbRMSNet
+GO
+GRANT connect to bodbRMSNet
+GO

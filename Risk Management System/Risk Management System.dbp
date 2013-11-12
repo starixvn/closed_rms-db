@@ -47,6 +47,7 @@ Begin DataProject = "Risk Management System"
    Begin Folder = "Queries"
       Script = "Req_20131025_Feature6675_InsertLogAction.sql"
       Script = "Req_20131025_Feature6675_StructureRMSforApollo.sql"
+      Script = "Req_20131111_Feature6675_GrantPermissionForWebAccount.sql"
       Begin Folder = "Top Winners"
       End
    End
