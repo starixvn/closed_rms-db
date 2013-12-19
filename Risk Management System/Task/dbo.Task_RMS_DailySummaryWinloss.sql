@@ -15,12 +15,12 @@ AS
 	*/
 SET NOCOUNT ON
 	
-	IF NOT EXISTS (SELECT top 1 1 FROM RepDB.dbo.bettrans14 WITH(NOLOCK) WHERE bettype = 9 AND matchid = 9 AND winlostdate = @winlostdate)
-	BEGIN
-		SELECT	 @ErrMsg= 'WARNING:Data is not moved to bettrans14.'
-				,@ErrCode = 101
-		RETURN
-	END
+	--IF NOT EXISTS (SELECT top 1 1 FROM RepDB.dbo.bettrans14 WITH(NOLOCK) WHERE bettype = 9 AND matchid = 9 AND winlostdate = @winlostdate)
+	--BEGIN
+	--	SELECT	 @ErrMsg= 'WARNING:Data is not moved to bettrans14.'
+	--			,@ErrCode = 101
+	--	RETURN
+	--END
 	
 	IF EXISTS (SELECT top 1 1 FROM RepDB.dbo.bettrans WITH(NOLOCK) WHERE bettype = 9 AND matchid = 9 AND winlostdate = @winlostdate)
 	BEGIN
