@@ -1,4 +1,12 @@
-﻿ALTER PROCEDURE [dbo].[Task_RMS_SumWinloss_Archive_Job]
+﻿USE [bodb_RMS]
+GO
+/****** Object:  StoredProcedure [dbo].[Task_RMS_SumWinloss_Archive_Job]    Script Date: 2/9/2014 11:36:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Stored Procedure dbo.Task_RMS_SumWinloss_Archive_Job    Script Date: 12/19/2013 4:02:19 PM ******/
+ALTER PROCEDURE [dbo].[Task_RMS_SumWinloss_Archive_Job]
 AS
 	/*
 		Created: Johnson
@@ -20,6 +28,10 @@ BEGIN
 	SELECT	@maxDateSum_Old = MAX(winlostdate) + 1  ---Saturday 
 	FROM	dbo.rmSumWinloss_Old WITH (NOLOCK)
 	
+	IF @maxDateSum_Old IS NULL
+		SELECT @maxDateSum_Old = MIN(winlostdate)
+		FROM dbo.rmSumWinloss WITH (NOLOCK)
+
 	SELECT TOP 1 @balanceUpDay = winlostdate
 	FROM RepDB.dbo.bettrans WITH(NOLOCK)
 	WHERE bettype = 20000 AND matchid =0 
